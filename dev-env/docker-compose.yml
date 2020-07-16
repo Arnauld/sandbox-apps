@@ -1,10 +1,56 @@
 version: "3.0"
 services:
+
+  postgres:
+    image: postgres:12.3
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+
+  keycloak_db:
+    image: postgres:12.3
+    restart: always
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    expose:
+      - 5432
+    ports:
+      - "5433:5432"
+
   keycloak:
     image: jboss/keycloak:10.0.2
     ports:
       - "8081:8080"
     environment:
-      - KEYCLOAK_USER=keycloak
-      - KEYCLOAK_PASSWORD=keycloak
+      KEYCLOAK_USER: keycloak
+      KEYCLOAK_PASSWORD: keycloak
+      DB_VENDOR: POSTGRES
+      DB_ADDR: keycloak_db
+      DB_PORT: 5432
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+    depends_on:
+      - keycloak_db
 
+  vault:
+    image: vault:1.4.3
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "8200:8200"
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=myroot
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8083:8080"
