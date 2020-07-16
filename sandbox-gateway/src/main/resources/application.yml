@@ -1,3 +1,20 @@
 server:
-    port: 8088
+    port: ${SERVER_PORT:8088}
 
+vault:
+  host: ${VAULT_HOST:localhost}
+  port: ${VAULT_PORT:8200}
+  scheme: ${VAULT_SCHEME:http}
+  token: ${VAULT_TOKEN:myroot}
+
+postgres:
+  driver:
+    name: ${DB_NAME:gateway}
+    secrets-path: ${DB_VAULT_ROLE:database/creds/vec_mobility_db_dc_dev_app}
+    migration-secrets-path: ${DB_VAULT_MIGRATION_ROLE:database/creds/vec_mobility_db_dc_dev}
+    migration-owner: ${DB_OWNER:vec_mobility_db_dc_dev}
+  service:
+    address : ${POSTGRES_ADDRESS:localhost}
+    port : ${POSTGRES_PORT:5432}
+    secure : ${POSTGRES_SECURE:false}
+    datacenter: ${CONSUL_MUTU_DATACENTER:}
