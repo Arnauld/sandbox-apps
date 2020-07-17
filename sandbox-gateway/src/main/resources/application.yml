@@ -1,5 +1,5 @@
 server:
-    port: ${SERVER_PORT:8088}
+  port: ${SERVER_PORT:8088}
 
 vault:
   enabled: false
@@ -15,7 +15,7 @@ postgres:
     migration-secrets-path: ${DB_VAULT_MIGRATION_ROLE:database/creds/vec_mobility_db_dc_dev}
     migration-owner: ${DB_OWNER:vec_mobility_db_dc_dev}
   service:
-    address : ${POSTGRES_ADDRESS:localhost}
-    port : ${POSTGRES_PORT:5432}
-    secure : ${POSTGRES_SECURE:false}
+    address: ${POSTGRES_ADDRESS:localhost}
+    port: ${POSTGRES_PORT:5432}
+    secure: ${POSTGRES_SECURE:false}
     datacenter: ${CONSUL_MUTU_DATACENTER:}
