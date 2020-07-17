@@ -8,12 +8,36 @@ vault:
   scheme: ${VAULT_SCHEME:http}
   token: ${VAULT_TOKEN:myroot}
 
+db:
+  secure: ${DB_SECURE:false}
+  host: ${DB_HOST:localhost}
+  port: ${DB_PORT:5432}
+  name: ${DB_NAME:gateway}
+  username: ${DB_USERNAME:gateway}
+  password: ${DB_PASSWORD:gateway}
+  pool:
+    maximum-size: 5
+    minimum-idle: 2
+    idle-timeout-ms: 300000 # 5min
+    connection-timeout-ms: 5000 # 5sec
+    maximum-lifetime-ms: 600000 # 10min
+  migration:
+    username: ${DB_MIGRATION_USERNAME:gateway}
+    password: ${DB_MIGRATION_PASSWORD:gateway}
+    owner: ${DB_MIGRATION_OWNER:gateway}
+
+
+
+spring:
+  flyway:
+    enabled: false
+
 postgres:
   driver:
     name: ${DB_NAME:gateway}
-    secrets-path: ${DB_VAULT_ROLE:database/creds/vec_mobility_db_dc_dev_app}
-    migration-secrets-path: ${DB_VAULT_MIGRATION_ROLE:database/creds/vec_mobility_db_dc_dev}
-    migration-owner: ${DB_OWNER:vec_mobility_db_dc_dev}
+    secrets-path: ${DB_VAULT_ROLE:database/creds/gateway_app}
+    migration-secrets-path: ${DB_VAULT_MIGRATION_ROLE:database/creds/gateway_mig}
+    migration-owner: ${DB_OWNER:gateway}
   service:
     address: ${POSTGRES_ADDRESS:localhost}
     port: ${POSTGRES_PORT:5432}
