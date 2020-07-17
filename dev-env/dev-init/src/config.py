@@ -12,5 +12,8 @@ def config():
                         "host": os.getenv('PG_HOST', "postgres"),
                         "port": int(os.getenv('PG_PORT', "5432")),
                         "username": os.getenv('PG_USERNAME', "postgres"),
-                        "password": os.getenv('PG_PASSWORD', "postgres")}}
+                        "password": os.getenv('PG_PASSWORD', "postgres"),
+                        "databases": [{"name": "gateway",
+                                       "username": "gateway",
+                                       "password": "gateway"}]}}
     return cfg
