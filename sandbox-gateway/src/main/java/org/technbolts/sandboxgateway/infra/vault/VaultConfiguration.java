@@ -3,6 +3,8 @@ package org.technbolts.sandboxgateway.infra.vault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.vault.authentication.ClientAuthentication;
@@ -13,6 +15,7 @@ import org.springframework.vault.core.VaultTemplate;
 import org.technbolts.sandboxgateway.infra.ShutdownManager;
 
 @Configuration
+@ConditionalOnExpression("${vault.enabled}")
 public class VaultConfiguration extends AbstractVaultConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(VaultConfiguration.class);
 

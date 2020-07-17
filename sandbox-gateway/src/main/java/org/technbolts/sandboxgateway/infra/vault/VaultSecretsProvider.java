@@ -2,6 +2,7 @@ package org.technbolts.sandboxgateway.infra.vault;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.vault.core.lease.SecretLeaseContainer;
@@ -14,6 +15,7 @@ import java.time.Duration;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
+@ConditionalOnExpression("${vault.enabled}")
 public class VaultSecretsProvider implements SecretsProvider {
     private static final Logger LOGGER = LoggerFactory.getLogger(VaultSecretsProvider.class);
 
