@@ -5,7 +5,7 @@ FROM python:3.7.4-alpine
 RUN apk update && \
     apk add --no-cache --update curl tar bash ncurses ca-certificates openssl openssh-client && \
     apk add --virtual build-deps gcc python3-dev libffi-dev openssl-dev musl-dev && \
-    apk add postgresql-dev && \
+    apk add postgresql-dev postgresql-client && \
     apk add netcat-openbsd && \
     pip3 install --no-cache --upgrade pip cffi && \
     rm -rf /var/cache/apk/* && \
